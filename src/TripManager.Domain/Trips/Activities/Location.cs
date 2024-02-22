@@ -1,7 +1,6 @@
-﻿using TripManager.Common.Exceptions.Domain;
-using TripManager.Common.Primitives;
+﻿using TripManager.Common.Primitives;
 
-namespace TripManager.Domain.Trips;
+namespace TripManager.Domain.Trips.Activities;
 
 public record Location : ValueObject
 {

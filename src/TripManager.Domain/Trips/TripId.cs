@@ -1,8 +1,7 @@
 ﻿using TripManager.Common.Exceptions.Domain;
 using TripManager.Common.Primitives;
-using TripManager.Domain.Users;
 
-namespace TripManager.Domain.Trip;
+namespace TripManager.Domain.Trips;
 
 public record TripId : ValueObject
 {
@@ -18,12 +17,12 @@ public record TripId : ValueObject
         Value = value;
     }
 
-    public static UserId New() => new(Guid.NewGuid());
-    public static UserId From(Guid value) => new(value);
-    public static UserId From(string value) => new(Guid.Parse(value));
+    public static TripId New() => new(Guid.NewGuid());
+    public static TripId From(Guid value) => new(value);
+    public static TripId From(string value) => new(Guid.Parse(value));
 
-    public static implicit operator Guid(TripId userId) => userId.Value;
-    public static implicit operator TripId(Guid userId) => new(userId);
+    public static implicit operator Guid(TripId tripId) => tripId.Value;
+    public static implicit operator TripId(Guid tripId) => new(tripId);
 
     public override string ToString() => Value.ToString();
 

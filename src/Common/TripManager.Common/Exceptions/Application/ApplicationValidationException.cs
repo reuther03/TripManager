@@ -1,6 +1,6 @@
 ﻿namespace TripManager.Common.Exceptions.Application;
 
-public class ApplicationValidationException : AppException
+public sealed class ApplicationValidationException : AppException
 {
     public ApplicationValidationException(string message)
         : base(message)

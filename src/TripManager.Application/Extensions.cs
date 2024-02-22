@@ -1,6 +1,11 @@
-﻿namespace TripManager.Application;
+﻿using Microsoft.Extensions.DependencyInjection;
 
-public class Extensions
+namespace TripManager.Application;
+
+internal static class Extensions
 {
-    
+    public static IServiceCollection AddApplication(this IServiceCollection services)
+    {
+        return services;
+    }
 }

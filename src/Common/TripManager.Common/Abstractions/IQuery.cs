@@ -1,6 +1,5 @@
-﻿namespace TripManager.Common.Abstractions;
+﻿using MediatR;
 
-public interface IQuery
-{
-    
-}
+namespace TripManager.Common.Abstractions;
+
+public interface IQuery<out TResponse> : IRequest<TResponse>;

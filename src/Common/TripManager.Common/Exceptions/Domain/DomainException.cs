@@ -1,8 +1,13 @@
-﻿namespace MySpot.Core.Exceptions;
+﻿namespace TripManager.Common.Exceptions.Domain;
 
 public class DomainException : Exception
 {
-    protected DomainException(string message) : base(message)
+    public DomainException(string message) : base(message)
+    {
+    }
+
+    public DomainException(string messageFormat, params object[] args)
+        : base(string.Format(messageFormat, args.Select(x => x.ToString())))
     {
     }
 }

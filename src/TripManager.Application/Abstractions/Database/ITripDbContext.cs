@@ -3,7 +3,7 @@ using TripManager.Domain.Trips;
 using TripManager.Domain.Trips.Activities;
 using TripManager.Domain.Users;
 
-namespace TripManager.Application.Abstractions;
+namespace TripManager.Application.Abstractions.Database;
 
 public interface ITripDbContext
 {

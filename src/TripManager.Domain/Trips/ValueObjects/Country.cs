@@ -1,7 +1,7 @@
 ﻿using TripManager.Common.Exceptions.Domain;
 using TripManager.Common.Primitives;
 
-namespace TripManager.Domain.Trip.ValueObjects;
+namespace TripManager.Domain.Trips.ValueObjects;
 
 public record Country : ValueObject
 {

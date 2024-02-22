@@ -1,13 +1,13 @@
 ﻿using TripManager.Common.Exceptions.Domain;
 using TripManager.Common.Primitives;
 
-namespace TripManager.Domain.Trips;
+namespace TripManager.Domain.Trips.Activities;
 
-public record TripId : ValueObject
+public record TripActivityId : ValueObject
 {
     public Guid Value { get; }
 
-    public TripId(Guid value)
+    public TripActivityId(Guid value)
     {
         if (value == Guid.Empty)
         {
@@ -17,12 +17,12 @@ public record TripId : ValueObject
         Value = value;
     }
 
-    public static TripId New() => new(Guid.NewGuid());
-    public static TripId From(Guid value) => new(value);
-    public static TripId From(string value) => new(Guid.Parse(value));
+    public static TripActivityId New() => new(Guid.NewGuid());
+    public static TripActivityId From(Guid value) => new(value);
+    public static TripActivityId From(string value) => new(Guid.Parse(value));
 
-    public static implicit operator Guid(TripId tripId) => tripId.Value;
-    public static implicit operator TripId(Guid tripId) => new(tripId);
+    public static implicit operator Guid(TripActivityId tripActivityId) => tripActivityId.Value;
+    public static implicit operator TripActivityId(Guid tripActivityId) => new(tripActivityId);
 
     public override string ToString() => Value.ToString();
 

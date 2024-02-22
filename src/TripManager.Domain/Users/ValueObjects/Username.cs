@@ -1,6 +1,8 @@
-﻿namespace MySpot.Core.ValueObjects;
+﻿using TripManager.Common.Primitives;
 
-public sealed record Username
+namespace TripManager.Domain.Users.ValueObjects;
+
+public sealed record Username : ValueObject
 {
     public string Value { get; set; }
 
@@ -18,4 +20,8 @@ public sealed record Username
     public static implicit operator string(Username username) => username.Value;
 
     public override string ToString() => Value;
+    protected override IEnumerable<object> GetAtomicValues()
+    {
+        yield return Value;
+    }
 }

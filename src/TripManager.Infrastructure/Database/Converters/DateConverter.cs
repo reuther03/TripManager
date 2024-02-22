@@ -1,6 +1,14 @@
-﻿namespace TripManager.Infrastructure.Database.Converters;
+﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using TripManager.Common.ValueObjects;
 
-public class DateConverter
+namespace TripManager.Infrastructure.Database.Converters;
+
+public sealed class DateConverter : ValueConverter<Date, DateTimeOffset>
 {
-    
+    public DateConverter() : base(
+        date => date.Value,
+        dateTimeOffset => new Date(dateTimeOffset)
+    )
+    {
+    }
 }
