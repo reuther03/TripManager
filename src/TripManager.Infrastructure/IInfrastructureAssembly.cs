@@ -1,3 +1,0 @@
-namespace TripManager.Infrastructure;
-
-public interface IInfrastructureAssembly;

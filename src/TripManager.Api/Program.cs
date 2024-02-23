@@ -22,14 +22,14 @@ services
 var app = builder.Build();
 
 
-app.MapGet("/test", async (ISender sender) =>
-    {
-        var result = await sender.Send(new GetRandomTextQuery());
-        return Results.Ok(result);
-    })
-    .WithDisplayName("Test Endpoint")
-    .WithDescription("This is a test endpoint.")
-    .WithOpenApi();
+// app.MapGet("/test", async (ISender sender) =>
+//     {
+//         var result = await sender.Send(new GetRandomTextQuery());
+//         return Results.Ok(result);
+//     })
+//     .WithDisplayName("Test Endpoint")
+//     .WithDescription("This is a test endpoint.")
+//     .WithOpenApi();
 
 app.UseInfrastructure();
 app.Run();

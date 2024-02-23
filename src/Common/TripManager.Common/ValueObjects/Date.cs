@@ -1,8 +1,9 @@
-﻿using TripManager.Common.Primitives;
+﻿using Microsoft.EntityFrameworkCore;
+using TripManager.Common.Primitives;
 
 namespace TripManager.Common.ValueObjects;
 
-
+[Keyless]
 public record Date : ValueObject
 {
     public DateTimeOffset Value { get; }
@@ -10,6 +11,10 @@ public record Date : ValueObject
     public Date(DateTimeOffset value)
     {
         Value = value;
+    }
+
+    public Date()
+    {
     }
 
     public Date AddDays(int days) => new(Value.AddDays(days));

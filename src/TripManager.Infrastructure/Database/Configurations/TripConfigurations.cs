@@ -26,7 +26,7 @@ public class TripConfigurations : IEntityTypeConfiguration<Trip>
         builder.Property(x => x.Description)
             .HasConversion(x => x.Value, x => new Description(x))
             .IsRequired()
-            .HasMaxLength(30);
+            .HasMaxLength(200);
 
         builder.Property(x => x.Start)
             .HasConversion<DateConverter>()
@@ -52,6 +52,5 @@ public class TripConfigurations : IEntityTypeConfiguration<Trip>
             .WithOne()
             .HasForeignKey(x => x.TripId)
             .OnDelete(DeleteBehavior.Cascade);
-
     }
 }

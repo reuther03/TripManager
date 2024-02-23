@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TripManager.Common.ValueObjects;
 
 namespace TripManager.Infrastructure.Database.Converters;

@@ -20,7 +20,7 @@ internal static class Extensions
         {
             config.RegisterServicesFromAssemblies([
                 typeof(IApplicationAssembly).Assembly,
-                typeof(IInfrastructureAssembly).Assembly
+                typeof(INfrastructureAssembly).Assembly
             ]);
         });
 

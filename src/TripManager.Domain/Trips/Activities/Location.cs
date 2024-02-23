@@ -7,6 +7,10 @@ public record Location : ValueObject
     public string Address { get; }
     public string Coordinates { get; }
 
+    public Location()
+    {
+    }
+
     public Location(string address, string coordinates)
     {
         Address = address;

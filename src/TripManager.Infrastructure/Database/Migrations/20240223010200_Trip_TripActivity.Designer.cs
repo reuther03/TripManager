@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TripManager.Infrastructure.Database;
@@ -11,9 +12,11 @@ using TripManager.Infrastructure.Database;
 namespace TripManager.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(TripDbContext))]
-    partial class TripDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240223010200_Trip_TripActivity")]
+    partial class Trip_TripActivity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
