@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using TripManager.Common.Abstractions;
 
 namespace TripManager.Application;
 

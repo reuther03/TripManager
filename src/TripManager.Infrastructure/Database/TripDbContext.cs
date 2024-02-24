@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using TripManager.Application.Abstractions;
+﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using TripManager.Application.Abstractions.Database;
 using TripManager.Domain.Trips;
 using TripManager.Domain.Trips.Activities;
@@ -7,7 +7,7 @@ using TripManager.Domain.Users;
 
 namespace TripManager.Infrastructure.Database;
 
-internal sealed class TripDbContext : DbContext, ITripDbContext
+public sealed class TripDbContext : DbContext, ITripDbContext
 {
     public DbSet<User> Users => Set<User>();
     public DbSet<Trip> Trips => Set<Trip>();

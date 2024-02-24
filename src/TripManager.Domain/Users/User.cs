@@ -1,4 +1,5 @@
 ﻿using TripManager.Common.Primitives;
+using TripManager.Common.Primitives.Domain;
 using TripManager.Common.ValueObjects;
 using TripManager.Domain.Trips;
 using TripManager.Domain.Users.ValueObjects;
@@ -32,9 +33,9 @@ public class User : Entity<UserId>
         CreatedAt = createdAt;
     }
 
-    internal static User CreateAdmin(Email email, Username username, Password password, Fullname fullname)
-        => new(UserId.New(), email, username, password, fullname, Role.Admin, Date.Now);
+    public static User CreateAdmin(Email email, Username username, Password password, Fullname fullname)
+        => new(UserId.New(), email, username, password, fullname, Role.Admin, Date.Now.Value);
 
-    internal static User CreateUser(Email email, Username username, Password password, Fullname fullname)
+    public static User CreateUser(Email email, Username username, Password password, Fullname fullname)
         => new(UserId.New(), email, username, password, fullname, Role.User, Date.Now);
 }

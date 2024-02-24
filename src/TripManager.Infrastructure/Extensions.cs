@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Reflection;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TripManager.Application;
+using TripManager.Application.Abstractions;
+using TripManager.Application.Features.Users.Commands;
+using TripManager.Infrastructure.Authentication;
 using TripManager.Infrastructure.Database;
 using TripManager.Infrastructure.Utilities.Swagger;
 
@@ -20,7 +24,7 @@ internal static class Extensions
         {
             config.RegisterServicesFromAssemblies([
                 typeof(IApplicationAssembly).Assembly,
-                typeof(INfrastructureAssembly).Assembly
+                typeof(IInfrastructureAssembly).Assembly
             ]);
         });
 

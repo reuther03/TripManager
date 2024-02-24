@@ -1,12 +1,13 @@
 ﻿using System.Security.Cryptography;
 using TripManager.Common.Exceptions.Domain;
 using TripManager.Common.Primitives;
+using TripManager.Common.Primitives.Domain;
 
 namespace TripManager.Domain.Users.ValueObjects;
 
 public record Password : ValueObject
 {
-    public string Value { get; set; }
+    public string Value { get; }
 
     public Password(string passwordHash)
     {
@@ -31,7 +32,6 @@ public record Password : ValueObject
 
     public static implicit operator string(Password password) => password.Value;
     public static implicit operator Password(string value) => new(value);
-
 
     public override string ToString() => Value;
 

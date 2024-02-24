@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TripManager.Common.ValueObjects;
 using TripManager.Domain.Trips;
 using TripManager.Domain.Trips.ValueObjects;
-using TripManager.Domain.Users.ValueObjects;
 using TripManager.Infrastructure.Database.Converters;
 
 namespace TripManager.Infrastructure.Database.Configurations;

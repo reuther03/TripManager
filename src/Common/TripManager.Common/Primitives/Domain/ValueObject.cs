@@ -1,4 +1,4 @@
-﻿namespace TripManager.Common.Primitives;
+﻿namespace TripManager.Common.Primitives.Domain;
 
 public abstract record ValueObject
 {

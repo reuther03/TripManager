@@ -1,4 +1,4 @@
-﻿namespace TripManager.Common.Primitives;
+﻿namespace TripManager.Common.Primitives.Domain;
 
 public abstract class Entity<TId> : IEquatable<Entity<TId>>
 {

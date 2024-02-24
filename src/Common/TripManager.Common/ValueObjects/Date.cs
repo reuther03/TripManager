@@ -1,9 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using TripManager.Common.Primitives;
+﻿using TripManager.Common.Primitives;
+using TripManager.Common.Primitives.Domain;
 
 namespace TripManager.Common.ValueObjects;
 
-[Keyless]
 public record Date : ValueObject
 {
     public DateTimeOffset Value { get; }
@@ -11,10 +10,6 @@ public record Date : ValueObject
     public Date(DateTimeOffset value)
     {
         Value = value;
-    }
-
-    public Date()
-    {
     }
 
     public Date AddDays(int days) => new(Value.AddDays(days));
@@ -40,6 +35,7 @@ public record Date : ValueObject
     public static Date Now => new(DateTimeOffset.Now);
 
     public override string ToString() => Value.ToString("d");
+
     protected override IEnumerable<object> GetAtomicValues()
     {
         yield return Value;
@@ -47,6 +43,4 @@ public record Date : ValueObject
 
     public DateTime DateOnly()
         => Value.Date;
-
-
 }

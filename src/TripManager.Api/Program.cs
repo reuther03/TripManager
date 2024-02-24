@@ -1,6 +1,5 @@
-using MediatR;
+using TripManager.Api.OptionsSetup;
 using TripManager.Application;
-using TripManager.Application.Features.Tests.Queries;
 using TripManager.Domain;
 using TripManager.Infrastructure;
 
@@ -15,6 +14,9 @@ services
     .AddApplication()
     .AddInfrastructure(builder.Configuration);
 
+services.ConfigureOptions<JwtOptionsSetup>();
+services.ConfigureOptions<JwtBearerOptionsSetup>();
+
 #endregion
 
 #region App
@@ -22,9 +24,9 @@ services
 var app = builder.Build();
 
 
-// app.MapGet("/test", async (ISender sender) =>
+// app.MapGet("/test", async (ISender sender, CancellationToken cancellationToken = default) =>
 //     {
-//         var result = await sender.Send(new GetRandomTextQuery());
+//         var result = await sender.Send(new GetRandomTextQuery(), cancellationToken);
 //         return Results.Ok(result);
 //     })
 //     .WithDisplayName("Test Endpoint")

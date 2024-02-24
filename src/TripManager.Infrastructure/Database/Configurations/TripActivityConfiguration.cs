@@ -33,12 +33,12 @@ public class TripActivityConfiguration : IEntityTypeConfiguration<TripActivity>
 
         builder.OwnsOne(x => x.Location, ownedBuilder =>
         {
+            ownedBuilder.WithOwner().HasForeignKey("TripActivityId");
             ownedBuilder.Property(x => x.Address)
                 .IsRequired();
 
             ownedBuilder.Property(x => x.Coordinates)
                 .IsRequired();
-
         });
     }
 }

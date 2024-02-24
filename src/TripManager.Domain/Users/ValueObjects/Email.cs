@@ -1,6 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using TripManager.Common.Exceptions.Domain;
 using TripManager.Common.Primitives;
+using TripManager.Common.Primitives.Domain;
 
 namespace TripManager.Domain.Users.ValueObjects;
 

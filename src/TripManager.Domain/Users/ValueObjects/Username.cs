@@ -1,4 +1,5 @@
 ﻿using TripManager.Common.Primitives;
+using TripManager.Common.Primitives.Domain;
 
 namespace TripManager.Domain.Users.ValueObjects;
 

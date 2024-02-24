@@ -1,4 +1,5 @@
 ﻿using TripManager.Common.Primitives;
+using TripManager.Common.Primitives.Domain;
 
 namespace TripManager.Domain.Trips.Activities;
 
@@ -6,10 +7,6 @@ public record Location : ValueObject
 {
     public string Address { get; }
     public string Coordinates { get; }
-
-    public Location()
-    {
-    }
 
     public Location(string address, string coordinates)
     {
