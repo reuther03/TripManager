@@ -1,4 +1,5 @@
-﻿using TripManager.Common.Primitives;
+﻿using TripManager.Common.Exceptions.Domain;
+using TripManager.Common.Primitives;
 using TripManager.Common.Primitives.Domain;
 using TripManager.Common.ValueObjects;
 using TripManager.Domain.Trips.Activities;
@@ -15,7 +16,7 @@ public class Trip : Entity<TripId>
     public Description Description { get; private set; }
     public Date Start { get; private set; }
     public Date End { get; private set; }
-    public TripSettings Settings { get; private set; }
+    public TripSettings Settings { get; private set; } = null!;
     public IReadOnlyList<TripActivity> Activities => _activities.AsReadOnly();
     public UserId UserId { get; private set; }
 
@@ -23,18 +24,24 @@ public class Trip : Entity<TripId>
     {
     }
 
-    private Trip(TripId id, Country country, Description description, Date start, Date end, UserId userId)
+    private Trip(TripId id, Country country, Description description, Date start, Date end, TripSettings settings, UserId userId)
         : base(id)
     {
         Country = country;
         Description = description;
         Start = start;
         End = end;
+        Settings = settings;
         UserId = userId;
     }
 
-    public static Trip CreateInstance(Country country, Description description, Date start, Date end, UserId userId)
+    public static Trip Create(Country country, Description description, Date start, Date end, TripSettings settings, UserId userId)
     {
-        return new Trip(TripId.New(), country, description, start, end, userId);
+        if (start.Value.Date > end.Value.Date)
+        {
+            throw new DomainException("Start date cannot be greater than end date");
+        }
+
+        return new Trip(TripId.New(), country, description, start, end, settings, userId);
     }
 }

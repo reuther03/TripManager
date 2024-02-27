@@ -6,7 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using TripManager.Application.Abstractions;
 using TripManager.Domain.Users;
 
-namespace TripManager.Infrastructure.Authentication;
+namespace TripManager.Infrastructure.Auth;
 
 public sealed class JwtProvider : IJwtProvider
 {
@@ -22,13 +22,15 @@ public sealed class JwtProvider : IJwtProvider
         List<Claim> claims =
         [
             new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+            new Claim(JwtRegisteredClaimNames.Email, user.Email),
             new Claim(JwtRegisteredClaimNames.UniqueName, user.Username),
-            new Claim(JwtRegisteredClaimNames.Email, user.Email)
+            new Claim(ClaimConsts.UserId, user.Id.ToString()),
+            new Claim(ClaimConsts.Email, user.Email),
+            new Claim(ClaimConsts.Username, user.Username)
         ];
 
         var signingCredentials = new SigningCredentials(
-            new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(_options.SecretKey)),
+            new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.SecretKey)),
             SecurityAlgorithms.HmacSha256Signature);
 
         var token = new JwtSecurityToken(
@@ -43,4 +45,11 @@ public sealed class JwtProvider : IJwtProvider
 
         return tokenValue;
     }
+}
+
+public static class ClaimConsts
+{
+    public const string UserId = "user_id";
+    public const string Email = "email";
+    public const string Username = "username";
 }

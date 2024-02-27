@@ -1,6 +1,7 @@
 ﻿using TripManager.Application.Abstractions.Database;
 using TripManager.Application.Abstractions.Database.Repositories;
 using TripManager.Common.Abstractions;
+using TripManager.Common.Exceptions.Application;
 using TripManager.Domain.Users;
 using TripManager.Domain.Users.ValueObjects;
 using PassValueObject = TripManager.Domain.Users.ValueObjects.Password;
@@ -14,7 +15,7 @@ public record SignUpCommand(string Email, string Username, string Password, stri
         private readonly IUserRepository _userRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public Handler(IUserRepository userRepository, IUnitOfWork unitOfWork, ITripDbContext tripDbContext)
+        public Handler(IUserRepository userRepository, IUnitOfWork unitOfWork)
         {
             _userRepository = userRepository;
             _unitOfWork = unitOfWork;
@@ -25,7 +26,7 @@ public record SignUpCommand(string Email, string Username, string Password, stri
             if (await _userRepository.ExistsWithEmailAsync(new Email(request.Email), cancellationToken) ||
                 await _userRepository.ExistsWithUsernameAsync(new Username(request.Username), cancellationToken))
             {
-                throw new ApplicationException("Email or username already exists");
+                throw new ApplicationValidationException("Email or username already exists");
             }
 
             var user = User.CreateUser(new Email(request.Email), new Username(request.Username), PassValueObject.Create(request.Password), new Fullname(request.Fullname));

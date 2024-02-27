@@ -5,7 +5,7 @@ using TripManager.Application.Abstractions;
 using TripManager.Application.Abstractions.Database;
 using TripManager.Application.Abstractions.Database.Repositories;
 using TripManager.Common;
-using TripManager.Infrastructure.Authentication;
+using TripManager.Infrastructure.Auth;
 using TripManager.Infrastructure.Database.Repository;
 
 // using TripManager.Infrastructure.Database.Repository;
@@ -23,8 +23,8 @@ public static class DatabaseExtensions
 
         services.AddScoped<ITripDbContext, TripDbContext>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
-        services.AddScoped<IJwtProvider, JwtProvider>();
 
+        services.AddScoped<ITripRepository, TripRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
 
         services.AddHostedService<DatabaseInitializer>();

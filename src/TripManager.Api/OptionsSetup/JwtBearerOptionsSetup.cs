@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using TripManager.Infrastructure.Authentication;
+using TripManager.Infrastructure.Auth;
 
 namespace TripManager.Api.OptionsSetup;
 

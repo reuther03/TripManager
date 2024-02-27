@@ -23,7 +23,6 @@ services.ConfigureOptions<JwtBearerOptionsSetup>();
 
 var app = builder.Build();
 
-
 // app.MapGet("/test", async (ISender sender, CancellationToken cancellationToken = default) =>
 //     {
 //         var result = await sender.Send(new GetRandomTextQuery(), cancellationToken);

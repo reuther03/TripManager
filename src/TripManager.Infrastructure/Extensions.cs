@@ -4,9 +4,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TripManager.Application;
 using TripManager.Application.Abstractions;
+using TripManager.Application.Abstractions.Database.Repositories;
 using TripManager.Application.Features.Users.Commands;
-using TripManager.Infrastructure.Authentication;
+using TripManager.Infrastructure.Auth;
 using TripManager.Infrastructure.Database;
+using TripManager.Infrastructure.Database.Repository;
 using TripManager.Infrastructure.Utilities.Swagger;
 
 namespace TripManager.Infrastructure;
@@ -19,6 +21,8 @@ internal static class Extensions
         services.AddDatabase(configuration);
         services.AddEndpointsApiExplorer();
         services.AddSwaggerDocumentation();
+
+        services.AddAuth(configuration);
 
         services.AddMediatR(config =>
         {

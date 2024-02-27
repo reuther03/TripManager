@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Options;
-using TripManager.Infrastructure.Authentication;
+using TripManager.Infrastructure.Auth;
 
 namespace TripManager.Api.OptionsSetup;
 
