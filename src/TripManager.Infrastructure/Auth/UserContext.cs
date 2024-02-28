@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using TripManager.Application.Abstractions;
 using TripManager.Domain.Users;
 using TripManager.Domain.Users.ValueObjects;
+using TripManager.Infrastructure.Authentication;
 
 namespace TripManager.Infrastructure.Auth;
 

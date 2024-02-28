@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using TripManager.Application.Abstractions;
 using TripManager.Common;
+using TripManager.Infrastructure.Authentication;
 
 namespace TripManager.Infrastructure.Auth;
 

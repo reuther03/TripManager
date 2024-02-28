@@ -6,7 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using TripManager.Application.Abstractions;
 using TripManager.Domain.Users;
 
-namespace TripManager.Infrastructure.Auth;
+namespace TripManager.Infrastructure.Authentication;
 
 public sealed class JwtProvider : IJwtProvider
 {

@@ -1,5 +1,4 @@
 ﻿using TripManager.Common.Exceptions.Domain;
-using TripManager.Common.Primitives;
 using TripManager.Common.Primitives.Domain;
 using TripManager.Common.ValueObjects;
 using TripManager.Domain.Trips.Activities;
@@ -43,5 +42,10 @@ public class Trip : Entity<TripId>
         }
 
         return new Trip(TripId.New(), country, description, start, end, settings, userId);
+    }
+
+    public void AddActivity(TripActivity activity)
+    {
+        _activities.Add(activity);
     }
 }

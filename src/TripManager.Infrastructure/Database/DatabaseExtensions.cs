@@ -1,11 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using TripManager.Application.Abstractions;
 using TripManager.Application.Abstractions.Database;
 using TripManager.Application.Abstractions.Database.Repositories;
 using TripManager.Common;
-using TripManager.Infrastructure.Auth;
 using TripManager.Infrastructure.Database.Repository;
 
 // using TripManager.Infrastructure.Database.Repository;
@@ -21,6 +19,7 @@ public static class DatabaseExtensions
         services.AddDbContext<TripDbContext>(dbContextOptionsBuilder => { dbContextOptionsBuilder.UseNpgsql(postgresOptions.ConnectionString); });
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
+        services.AddScoped<IActivityRepository, ActivityRepository>();
         services.AddScoped<ITripDbContext, TripDbContext>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 

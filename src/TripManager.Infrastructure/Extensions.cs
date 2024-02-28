@@ -1,14 +1,9 @@
-﻿using System.Reflection;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TripManager.Application;
-using TripManager.Application.Abstractions;
-using TripManager.Application.Abstractions.Database.Repositories;
-using TripManager.Application.Features.Users.Commands;
 using TripManager.Infrastructure.Auth;
 using TripManager.Infrastructure.Database;
-using TripManager.Infrastructure.Database.Repository;
 using TripManager.Infrastructure.Utilities.Swagger;
 
 namespace TripManager.Infrastructure;

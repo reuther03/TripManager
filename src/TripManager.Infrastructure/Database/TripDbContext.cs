@@ -1,5 +1,4 @@
-﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using TripManager.Application.Abstractions.Database;
 using TripManager.Domain.Trips;
 using TripManager.Domain.Trips.Activities;

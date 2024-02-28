@@ -1,4 +1,4 @@
-﻿namespace TripManager.Infrastructure.Auth;
+﻿namespace TripManager.Infrastructure.Authentication;
 
 public class JwtOptions
 {

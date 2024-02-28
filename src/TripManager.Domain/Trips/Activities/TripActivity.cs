@@ -1,5 +1,4 @@
-﻿using TripManager.Common.Primitives;
-using TripManager.Common.Primitives.Domain;
+﻿using TripManager.Common.Primitives.Domain;
 using TripManager.Common.ValueObjects;
 
 namespace TripManager.Domain.Trips.Activities;
@@ -31,4 +30,6 @@ public class TripActivity : Entity<TripActivityId>
     {
         return new TripActivity(TripActivityId.New(), name, description, start, end, location);
     }
+
+
 }
