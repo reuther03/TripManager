@@ -8,7 +8,7 @@ using TripManager.Domain.Trips.Activities;
 
 namespace TripManager.Application.Features.Trips.Commands;
 
-public record CreateActivityCommand(
+public record AddActivityCommand(
     string Name,
     string Description,
     DateTimeOffset Start,
@@ -17,7 +17,7 @@ public record CreateActivityCommand(
     Guid TripId
 ) : ICommand<TripActivity>
 {
-    internal sealed class Handler : ICommandHandler<CreateActivityCommand, TripActivity>
+    internal sealed class Handler : ICommandHandler<AddActivityCommand, TripActivity>
     {
         private readonly ITripRepository _tripRepository;
         private readonly IActivityRepository _activityRepository;
@@ -30,7 +30,7 @@ public record CreateActivityCommand(
             _activityRepository = activityRepository;
         }
 
-        public async Task<TripActivity> Handle(CreateActivityCommand request, CancellationToken cancellationToken)
+        public async Task<TripActivity> Handle(AddActivityCommand request, CancellationToken cancellationToken)
         {
             var trip = await _tripRepository.GetByIdAsync(request.TripId, cancellationToken)
                 ?? throw new ApplicationValidationException("Trip not found");

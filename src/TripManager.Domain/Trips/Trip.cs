@@ -48,4 +48,18 @@ public class Trip : Entity<TripId>
     {
         _activities.Add(activity);
     }
+
+    public void Update(Country country, Description description, Date start, Date end, TripSettings settings)
+    {
+        if (start.Value.Date > end.Value.Date)
+        {
+            throw new DomainException("Start date cannot be greater than end date");
+        }
+
+        Country = country;
+        Description = description;
+        Start = start;
+        End = end;
+        Settings = settings;
+    }
 }

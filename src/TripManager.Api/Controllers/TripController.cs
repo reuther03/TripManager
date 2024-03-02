@@ -26,6 +26,13 @@ public class TripsController : ControllerBase
         return Ok(trip);
     }
 
+    [HttpPost("{id:guid}/activities")]
+    public async Task<ActionResult<Guid>> Post(Guid id, AddActivityCommand command)
+    {
+        var activity = await _sender.Send(command with{TripId = id});
+        return Ok(activity);
+    }
+
     [HttpGet("{id:guid}")]
     public async Task<ActionResult<Trip>> Get(Guid id)
     {

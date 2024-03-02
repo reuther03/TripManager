@@ -5,9 +5,9 @@ using TripManager.Domain.Trips;
 
 namespace TripManager.Application.Features.Trips.Queries.GetTrip;
 
-public record GetTripQuery(Guid Id) : IQuery<Trip>
+public record GetTripQuery(Guid Id) : IQuery<TripDto>
 {
-    internal sealed class Handler : IQueryHandler<GetTripQuery, Trip>
+    internal sealed class Handler : IQueryHandler<GetTripQuery, TripDto>
     {
         private readonly ITripRepository _tripRepository;
 
@@ -16,11 +16,14 @@ public record GetTripQuery(Guid Id) : IQuery<Trip>
             _tripRepository = tripRepository;
         }
 
-        public async Task<Trip> Handle(GetTripQuery request, CancellationToken cancellationToken)
+        public async Task<TripDto> Handle(GetTripQuery request, CancellationToken cancellationToken)
         {
             var trip = await _tripRepository.GetByIdAsync(request.Id, cancellationToken);
 
-            return trip ?? throw new ApplicationValidationException("Trip not found.");
+            if (trip is null)
+                throw new ApplicationException($"Trip with id {request.Id} was not found.");
+
+            return TripDto.AsDto(trip);
         }
     }
 }

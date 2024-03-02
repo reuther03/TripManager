@@ -25,15 +25,8 @@ public class TripRepository : ITripRepository
     public async Task<Trip?> GetByIdAsync(TripId id, CancellationToken cancellationToken = default)
         => await _dbContext.Trips
             .Include(x => x.Activities)
-            .AsNoTracking()
             .AsSplitQuery()
             .SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
-
-    public Task UpdateAsync(Trip trip, CancellationToken cancellationToken = default)
-    {
-        _dbContext.Trips.Update(trip);
-        return Task.CompletedTask;
-    }
 
     public async Task AddAsync(Trip trip, CancellationToken cancellationToken = default)
         => await _dbContext.Trips.AddAsync(trip, cancellationToken);
