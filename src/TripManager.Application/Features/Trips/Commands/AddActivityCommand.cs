@@ -1,5 +1,6 @@
 ﻿using TripManager.Application.Abstractions.Database;
 using TripManager.Application.Abstractions.Database.Repositories;
+using TripManager.Application.Features.Trips.Payloads;
 using TripManager.Common.Abstractions;
 using TripManager.Common.Exceptions.Application;
 using TripManager.Common.ValueObjects;
@@ -12,8 +13,7 @@ public record CreateActivityCommand(
     string Description,
     DateTimeOffset Start,
     DateTimeOffset End,
-    string? LocationAddress,
-    string? LocationCoordinates,
+    LocationPayload Location,
     Guid TripId
 ) : ICommand<TripActivity>
 {
@@ -43,13 +43,11 @@ public record CreateActivityCommand(
                 request.Description,
                 new Date(request.Start),
                 new Date(request.End),
-                new Location(request.LocationAddress, request.LocationCoordinates)
-            );
-
+                request.Location.ToLocation());
 
             trip.AddActivity(activity);
+
             await _activityRepository.AddAsync(activity, cancellationToken);
-            await _tripRepository.UpdateAsync(trip, cancellationToken);
             await _unitOfWork.CommitAsync(cancellationToken);
             return activity;
         }
