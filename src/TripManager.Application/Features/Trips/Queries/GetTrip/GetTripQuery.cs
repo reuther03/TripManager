@@ -3,7 +3,7 @@ using TripManager.Common.Abstractions;
 using TripManager.Common.Exceptions.Application;
 using TripManager.Domain.Trips;
 
-namespace TripManager.Application.Features.Trips.Queries;
+namespace TripManager.Application.Features.Trips.Queries.GetTrip;
 
 public record GetTripQuery(Guid Id) : IQuery<Trip>
 {

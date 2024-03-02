@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using TripManager.Application.Features.Trips;
 using TripManager.Application.Features.Trips.Commands;
 using TripManager.Application.Features.Trips.Queries;
+using TripManager.Application.Features.Trips.Queries.GetTrip;
 using TripManager.Domain.Trips;
 
 namespace TripManager.Api.Controllers;

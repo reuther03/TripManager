@@ -1,4 +1,4 @@
-﻿namespace TripManager.Application.Features.Trips.Queries.GetAllTrips;
+﻿namespace TripManager.Common.Primitives.Pagination;
 
 public class PaginatedList<T>
 {
