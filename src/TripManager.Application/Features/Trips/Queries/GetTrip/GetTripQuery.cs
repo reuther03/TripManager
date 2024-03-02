@@ -1,4 +1,5 @@
-﻿using TripManager.Application.Abstractions.Database.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
+using TripManager.Application.Abstractions.Database;
 using TripManager.Common.Abstractions;
 using TripManager.Common.Exceptions.Application;
 using TripManager.Domain.Trips;
@@ -9,19 +10,23 @@ public record GetTripQuery(Guid Id) : IQuery<TripDto>
 {
     internal sealed class Handler : IQueryHandler<GetTripQuery, TripDto>
     {
-        private readonly ITripRepository _tripRepository;
+        private readonly ITripDbContext _dbContext;
 
-        public Handler(ITripRepository tripRepository)
+        public Handler(ITripDbContext dbContext)
         {
-            _tripRepository = tripRepository;
+            _dbContext = dbContext;
         }
 
         public async Task<TripDto> Handle(GetTripQuery request, CancellationToken cancellationToken)
         {
-            var trip = await _tripRepository.GetByIdAsync(request.Id, cancellationToken);
+            var trip = await _dbContext.Trips
+                .Include(x => x.Activities)
+                .SingleOrDefaultAsync(x => x.Id == TripId.From(request.Id), cancellationToken);
 
             if (trip is null)
-                throw new ApplicationException($"Trip with id {request.Id} was not found.");
+            {
+                throw new ApplicationValidationException("Trip not found.");
+            }
 
             return TripDto.AsDto(trip);
         }
