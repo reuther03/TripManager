@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TripManager.Api</name>
+    </assembly>
+    <members>
+        <member name="M:TripManager.Api.Controllers.TripsController.GetById(System.Guid)">
+            <summary>
+            Gets a trip by its id
+            </summary>
+            <remarks>
+            Example request:
+            ```
+            GET /trips/123e4567-e89b-12d3-a456-426614174000
+            ```
+            </remarks>
+            <param name="id">The id of the trip</param>
+            <returns>The trip</returns>
+        </member>
+    </members>
+</doc>

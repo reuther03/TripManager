@@ -39,6 +39,8 @@ public static class SwaggerExtensions
             });
 
             swagger.EnableAnnotations();
+
+            swagger.IncludeXmlComments("TripManager.Api.xml");
         });
 
         return services;

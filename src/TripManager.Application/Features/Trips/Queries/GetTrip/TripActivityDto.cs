@@ -23,4 +23,9 @@ public class TripActivityDto
             LocationCoordinates = tripActivity.Location.Coordinates
         };
     }
+
+    public static TripActivityDto? AsNullableDto(TripActivity? tripActivity)
+        => tripActivity is not null
+            ? AsDto(tripActivity)
+            : null;
 }

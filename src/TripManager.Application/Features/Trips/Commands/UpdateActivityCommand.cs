@@ -16,39 +16,34 @@ public record UpdateActivityCommand(
     DateTimeOffset Start,
     DateTimeOffset End,
     string LocationAddress,
-    string LocationCoordinates) : ICommand<TripActivityDto>
+    string LocationCoordinates) : ICommand<TripActivityDto?>
 {
-    internal sealed class Handler : ICommandHandler<UpdateActivityCommand, TripActivityDto>
+    internal sealed class Handler : ICommandHandler<UpdateActivityCommand, TripActivityDto?>
     {
         private readonly ITripRepository _tripRepository;
-        private readonly IActivityRepository _activityRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public Handler(ITripRepository tripRepository, IUnitOfWork unitOfWork, IActivityRepository activityRepository)
+        public Handler(ITripRepository tripRepository, IUnitOfWork unitOfWork)
         {
             _tripRepository = tripRepository;
             _unitOfWork = unitOfWork;
-            _activityRepository = activityRepository;
         }
 
-        public async Task<TripActivityDto> Handle(UpdateActivityCommand request, CancellationToken cancellationToken)
+        public async Task<TripActivityDto?> Handle(UpdateActivityCommand request, CancellationToken cancellationToken)
         {
             var trip = await _tripRepository.GetByIdAsync(request.TripId, cancellationToken)
                 ?? throw new ApplicationValidationException("Trip not found");
 
-            var activity = await _activityRepository.GetByIdAsync(new TripActivityId(request.ActivityId), cancellationToken)
-                ?? throw new ApplicationValidationException("Activity not found");
-
-            activity.Update(
+            var updatedActivity = trip.UpdateActivity(
+                request.ActivityId,
                 request.Name,
                 request.Description,
                 new Date(request.Start),
                 new Date(request.End),
-                new Location(request.LocationAddress, request.LocationCoordinates)
-            );
+                new Location(request.LocationAddress, request.LocationCoordinates));
 
             await _unitOfWork.CommitAsync(cancellationToken);
-            return TripActivityDto.AsDto(activity);
+            return TripActivityDto.AsNullableDto(updatedActivity);
         }
     }
 }

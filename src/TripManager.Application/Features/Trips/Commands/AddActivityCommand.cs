@@ -20,14 +20,12 @@ public record AddActivityCommand(
     internal sealed class Handler : ICommandHandler<AddActivityCommand, TripActivity>
     {
         private readonly ITripRepository _tripRepository;
-        private readonly IActivityRepository _activityRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public Handler(ITripRepository tripRepository, IUnitOfWork unitOfWork, IActivityRepository activityRepository)
+        public Handler(ITripRepository tripRepository, IUnitOfWork unitOfWork)
         {
             _tripRepository = tripRepository;
             _unitOfWork = unitOfWork;
-            _activityRepository = activityRepository;
         }
 
         public async Task<TripActivity> Handle(AddActivityCommand request, CancellationToken cancellationToken)
@@ -47,7 +45,6 @@ public record AddActivityCommand(
 
             trip.AddActivity(activity);
 
-            await _activityRepository.AddAsync(activity, cancellationToken);
             await _unitOfWork.CommitAsync(cancellationToken);
             return activity;
         }

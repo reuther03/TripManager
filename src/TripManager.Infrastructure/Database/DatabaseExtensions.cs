@@ -19,7 +19,6 @@ public static class DatabaseExtensions
         services.AddDbContext<TripDbContext>(dbContextOptionsBuilder => { dbContextOptionsBuilder.UseNpgsql(postgresOptions.ConnectionString); });
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
-        services.AddScoped<IActivityRepository, ActivityRepository>();
         services.AddScoped<ITripDbContext, TripDbContext>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 

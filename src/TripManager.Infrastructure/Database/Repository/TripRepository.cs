@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TripManager.Application.Abstractions.Database.Repositories;
 using TripManager.Domain.Trips;
+using TripManager.Domain.Trips.Activities;
 using TripManager.Domain.Users;
 
 namespace TripManager.Infrastructure.Database.Repository;
@@ -30,4 +31,18 @@ public class TripRepository : ITripRepository
 
     public async Task AddAsync(Trip trip, CancellationToken cancellationToken = default)
         => await _dbContext.Trips.AddAsync(trip, cancellationToken);
+
+    public void Delete(Trip trip, CancellationToken cancellationToken = default)
+        => _dbContext.Trips.Remove(trip);
+
+    public async void DeleteActivity(TripId tripId, TripActivityId activityId, CancellationToken cancellationToken = default)
+    {
+        var activity = await _dbContext.Set<TripActivity>().SingleOrDefaultAsync(x => x.TripId == tripId && x.Id == activityId, cancellationToken);
+        if (activity is null)
+        {
+            return;
+        }
+
+        _dbContext.Set<TripActivity>().Remove(activity);
+    }
 }

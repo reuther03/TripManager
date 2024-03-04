@@ -62,4 +62,22 @@ public class Trip : Entity<TripId>
         End = end;
         Settings = settings;
     }
+
+    public void RemoveActivity(Guid activityId)
+    {
+        var activity = _activities.SingleOrDefault(x => x.Id == TripActivityId.From(activityId));
+        if (activity is null)
+        {
+            return;
+        }
+
+        _activities.Remove(activity);
+    }
+
+    public TripActivity? UpdateActivity(Guid requestActivityId, string requestName, string requestDescription, Date date, Date date1, Location location)
+    {
+        var activity = _activities.SingleOrDefault(x => x.Id == TripActivityId.From(requestActivityId));
+        activity?.Update(requestName, requestDescription, date, date1, location);
+        return activity;
+    }
 }

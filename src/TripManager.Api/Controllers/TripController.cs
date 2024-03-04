@@ -19,6 +19,17 @@ public class TripsController : ControllerBase
         _sender = sender;
     }
 
+    /// <summary>
+    /// Gets a trip by its id
+    /// </summary>
+    /// <remarks>
+    /// Example request:
+    /// ```
+    /// GET /trips/123e4567-e89b-12d3-a456-426614174000
+    /// ```
+    /// </remarks>
+    /// <param name="id">The id of the trip</param>
+    /// <returns>The trip</returns>
     [HttpGet("{id:guid}")]
     public async Task<ActionResult<Trip>> GetById([FromRoute] Guid id)
     {
@@ -59,5 +70,19 @@ public class TripsController : ControllerBase
     {
         await _sender.Send(command with { TripId = id, ActivityId = activityId });
         return Ok();
+    }
+
+    [HttpDelete("{id:guid}")]
+    public async Task<ActionResult> DeleteTrip([FromRoute] Guid id)
+    {
+        await _sender.Send(new DeleteTripCommand(id));
+        return NoContent();
+    }
+
+    [HttpDelete("{id:guid}/activities/{activityId:guid}")]
+    public async Task<ActionResult> DeleteActivity([FromRoute] Guid id, [FromRoute] Guid activityId)
+    {
+        await _sender.Send(new DeleteActivityCommand(id, activityId));
+        return NoContent();
     }
 }
