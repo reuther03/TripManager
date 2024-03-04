@@ -1,31 +1,27 @@
-﻿using TripManager.Domain.Trips;
+﻿using TripManager.Application.Features.Trips.Queries.GetTrip;
+using TripManager.Domain.Trips;
 
-namespace TripManager.Application.Features.Trips.Queries.GetTrip;
+namespace TripManager.Application.Features.Trips.Dto;
 
-public class TripDto
+public class UpdateTripDto
 {
-    public Guid Id { get; init; }
     public string Country { get; init; } = null!;
     public string Description { get; init; } = null!;
     public DateTimeOffset Start { get; init; }
     public DateTimeOffset End { get; init; }
     public string SettingsDescription { get; init; } = null!;
     public decimal SettingsBudget { get; init; }
-    public List<TripActivityDto> Activities { get; init; } = null!;
 
-    public static TripDto AsDto(Trip trip)
+    public static UpdateTripDto AsDto(Trip trip)
     {
-        return new TripDto
+        return new UpdateTripDto
         {
-            Id = trip.Id,
             Country = trip.Country,
             Description = trip.Description,
             Start = trip.Start,
             End = trip.End,
             SettingsDescription = trip.Settings.Description,
             SettingsBudget = trip.Settings.Budget,
-            Activities = trip.Activities.Select(TripActivityDto.AsDto).ToList()
         };
     }
-
 }

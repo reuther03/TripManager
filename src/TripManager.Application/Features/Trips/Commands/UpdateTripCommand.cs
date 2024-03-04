@@ -1,5 +1,7 @@
 ﻿using TripManager.Application.Abstractions.Database;
 using TripManager.Application.Abstractions.Database.Repositories;
+using TripManager.Application.Features.Trips.Dto;
+using TripManager.Application.Features.Trips.Queries.GetTrip;
 using TripManager.Common.Abstractions;
 using TripManager.Common.Exceptions.Application;
 using TripManager.Common.ValueObjects;
@@ -16,9 +18,9 @@ public record UpdateTripCommand(
     DateTimeOffset End,
     string SettingsDescription,
     decimal SettingsBudget
-) : ICommand<Trip>
+) : ICommand<UpdateTripDto>
 {
-    internal sealed class Handler : ICommandHandler<UpdateTripCommand, Trip>
+    internal sealed class Handler : ICommandHandler<UpdateTripCommand, UpdateTripDto>
     {
         private readonly ITripRepository _tripRepository;
         private readonly IUnitOfWork _unitOfWork;
@@ -29,7 +31,7 @@ public record UpdateTripCommand(
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Trip> Handle(UpdateTripCommand request, CancellationToken cancellationToken)
+        public async Task<UpdateTripDto> Handle(UpdateTripCommand request, CancellationToken cancellationToken)
         {
             var trip = await _tripRepository.GetByIdAsync(new TripId(request.Id), cancellationToken)
                 ?? throw new ApplicationValidationException("Trip not found");
@@ -39,11 +41,12 @@ public record UpdateTripCommand(
                 new Description(request.Description),
                 new Date(request.Start),
                 new Date(request.End),
-                new TripSettings(request.SettingsDescription, request.SettingsBudget));
+                new TripSettings(request.SettingsDescription, request.SettingsBudget)
+            );
 
-            await _tripRepository.AddAsync(trip, cancellationToken);
+
             await _unitOfWork.CommitAsync(cancellationToken);
-            return trip;
+            return UpdateTripDto.AsDto(trip);
         }
     }
 }

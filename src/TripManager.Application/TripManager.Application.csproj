@@ -16,7 +16,6 @@
 
     <ItemGroup>
       <Folder Include="Features\Tests\Commands\" />
-      <Folder Include="Features\Trips\Dto\" />
     </ItemGroup>
 
 </Project>

@@ -48,4 +48,11 @@ public class TripsController : ControllerBase
         var activity = await _sender.Send(command with { TripId = id });
         return Ok(activity);
     }
+
+    [HttpPut("{id:guid}")]
+    public async Task<ActionResult> UpdateTrip(Guid id, UpdateTripCommand command)
+    {
+        await _sender.Send(command with { Id = id });
+        return NoContent();
+    }
 }
