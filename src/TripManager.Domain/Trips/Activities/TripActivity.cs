@@ -1,4 +1,5 @@
-﻿using TripManager.Common.Primitives.Domain;
+﻿using TripManager.Common.Exceptions.Domain;
+using TripManager.Common.Primitives.Domain;
 using TripManager.Common.ValueObjects;
 
 namespace TripManager.Domain.Trips.Activities;
@@ -31,5 +32,18 @@ public class TripActivity : Entity<TripActivityId>
         return new TripActivity(TripActivityId.New(), name, description, start, end, location);
     }
 
+    public void Update(string name, string description, Date start, Date end, Location location)
+    {
+        if (start.Value.Date > end.Value.Date)
+        {
+            throw new DomainException("Start date cannot be greater than end date");
+        }
+
+        Name = name;
+        Description = description;
+        Start = start;
+        End = end;
+        Location = location;
+    }
 
 }

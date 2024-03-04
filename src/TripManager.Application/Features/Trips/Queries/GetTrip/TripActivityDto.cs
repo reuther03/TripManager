@@ -4,8 +4,8 @@ namespace TripManager.Application.Features.Trips.Queries.GetTrip;
 
 public class TripActivityDto
 {
-    public string Name { get; init; }
-    public string Description { get; init; }
+    public string Name { get; init; } = null!;
+    public string Description { get; init; } = null!;
     public DateTimeOffset Start { get; init; }
     public DateTimeOffset End { get; init; }
     public string? LocationAddress { get; init; }

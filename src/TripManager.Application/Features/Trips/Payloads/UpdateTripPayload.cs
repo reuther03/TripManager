@@ -1,9 +1,8 @@
-﻿using TripManager.Application.Features.Trips.Queries.GetTrip;
-using TripManager.Domain.Trips;
+﻿using TripManager.Domain.Trips;
 
-namespace TripManager.Application.Features.Trips.Dto;
+namespace TripManager.Application.Features.Trips.Payloads;
 
-public class UpdateTripDto
+public class UpdateTripPayload
 {
     public string Country { get; init; } = null!;
     public string Description { get; init; } = null!;
@@ -12,9 +11,9 @@ public class UpdateTripDto
     public string SettingsDescription { get; init; } = null!;
     public decimal SettingsBudget { get; init; }
 
-    public static UpdateTripDto AsDto(Trip trip)
+    public static UpdateTripPayload AsDto(Trip trip)
     {
-        return new UpdateTripDto
+        return new UpdateTripPayload
         {
             Country = trip.Country,
             Description = trip.Description,

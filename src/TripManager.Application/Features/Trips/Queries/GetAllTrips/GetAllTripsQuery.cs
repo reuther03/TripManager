@@ -4,7 +4,6 @@ using TripManager.Application.Abstractions.Database;
 using TripManager.Application.Features.Trips.Queries.GetTrip;
 using TripManager.Common.Abstractions;
 using TripManager.Common.Primitives.Pagination;
-using TripManager.Domain.Users;
 
 namespace TripManager.Application.Features.Trips.Queries.GetAllTrips;
 
