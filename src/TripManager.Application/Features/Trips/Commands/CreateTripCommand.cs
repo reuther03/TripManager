@@ -55,3 +55,28 @@ public record CreateTripCommand(
         }
     }
 }
+
+// public sealed class EmailSettings
+// {
+//     public const string SectionName = "EmailSettings";
+//
+//     public int SmtpPort { get; set; } = default!; // 465
+//     public string SmtpServer { get; set; } = default!; // smtp.outlook.com
+//
+//     public string FromAddress { get; set; } = default!; // email address - tripmanager@outlook.com
+//     public string FromName { get; set; } = default!; // Trip Manager
+//
+//     public string Username { get; set; } = default!; // email address - tripmanager@outlook.com
+//     public string Password { get; set; } = default!; // password - jakies haslo
+// }
+//
+// {
+//     "EmailSettings": {
+//         "SmtpPort": 465,
+//         "SmtpServer": "smtp.outlook.com",
+//         "FromAddress": "",
+//         "FromName": "Trip Manager",
+//         "Username": "",
+//         "Password": ""
+//     }
+// }

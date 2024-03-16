@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 
 services
-    .AddDomain()
+    .AddDomain(builder.Configuration)
     .AddApplication()
     .AddInfrastructure(builder.Configuration);
 

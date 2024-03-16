@@ -1,11 +1,28 @@
-﻿namespace TripManager.Common.Primitives.Domain;
+﻿using TripManager.Common.Primitives.DomainEvents;
 
-public abstract class Entity<TId> : IEquatable<Entity<TId>>
+namespace TripManager.Common.Primitives.Domain;
+
+public interface IEntity
 {
+    IReadOnlyList<IDomainEvent> DomainEvents { get; }
+
+    void RaiseDomainEvent(IDomainEvent domainEvent);
+    void ClearDomainEvents();
+}
+
+public abstract class Entity<TId> : IEquatable<Entity<TId>>, IEntity
+{
+    private readonly List<IDomainEvent> _domainEvents = [];
+
     /// <summary>
     /// The entity identifier.
     /// </summary>
     public TId Id { get; } = default!;
+
+    /// <summary>
+    /// The domain events raised by the entity.
+    /// </summary>
+    public IReadOnlyList<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Entity{TId}"/> class.
@@ -68,4 +85,10 @@ public abstract class Entity<TId> : IEquatable<Entity<TId>>
 
     public override int GetHashCode()
         => (GetType(), Id).GetHashCode();
+
+    public void RaiseDomainEvent(IDomainEvent domainEvent)
+        => _domainEvents.Add(domainEvent);
+
+    public void ClearDomainEvents()
+        => _domainEvents.Clear();
 }

@@ -1,1 +1,0 @@
-namespace TripManager.Application.Features.Tests.Queries;

@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using TripManager.Application.Abstractions;
 using TripManager.Application.Abstractions.Database;
 using TripManager.Application.Abstractions.Database.Repositories;
+using TripManager.Application.Features.Emails;
 using TripManager.Common;
 using TripManager.Infrastructure.Database.Repository;
 
@@ -24,6 +26,8 @@ public static class DatabaseExtensions
 
         services.AddScoped<ITripRepository, TripRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IEmailSender, EmailSender>();
+
 
         services.AddHostedService<DatabaseInitializer>();
 

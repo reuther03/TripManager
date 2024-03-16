@@ -1,6 +1,7 @@
 ﻿using TripManager.Common.Exceptions.Domain;
 using TripManager.Common.Primitives.Domain;
 using TripManager.Common.ValueObjects;
+using TripManager.Domain.DomainEvents;
 using TripManager.Domain.Trips.Activities;
 using TripManager.Domain.Trips.ValueObjects;
 using TripManager.Domain.Users;
@@ -41,7 +42,9 @@ public class Trip : Entity<TripId>
             throw new DomainException("Start date cannot be greater than end date");
         }
 
-        return new Trip(TripId.New(), country, description, start, end, settings, userId);
+        var trip = new Trip(TripId.New(), country, description, start, end, settings, userId);
+        // trip.RaiseDomainEvent(new TripCreatedDomainEvent(trip.Id, trip.UserId));
+        return trip;
     }
 
     public void AddActivity(TripActivity activity)
@@ -61,6 +64,8 @@ public class Trip : Entity<TripId>
         Start = start;
         End = end;
         Settings = settings;
+
+        RaiseDomainEvent(new UpdatedTripDomainEvent(Id));
     }
 
     public void RemoveActivity(Guid activityId)
