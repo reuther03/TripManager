@@ -1,4 +1,5 @@
-﻿using TripManager.Application.Abstractions.Database;
+﻿using TripManager.Application.Abstractions;
+using TripManager.Application.Abstractions.Database;
 using TripManager.Application.Abstractions.Database.Repositories;
 using TripManager.Common.Abstractions;
 using TripManager.Common.Exceptions.Application;
@@ -14,11 +15,13 @@ public record SignUpCommand(string Email, string Username, string Password, stri
     {
         private readonly IUserRepository _userRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IEmailSender _emailSender;
 
-        public Handler(IUserRepository userRepository, IUnitOfWork unitOfWork)
+        public Handler(IUserRepository userRepository, IUnitOfWork unitOfWork, IEmailSender emailSender)
         {
             _userRepository = userRepository;
             _unitOfWork = unitOfWork;
+            _emailSender = emailSender;
         }
 
         public async Task<Guid> Handle(SignUpCommand request, CancellationToken cancellationToken)

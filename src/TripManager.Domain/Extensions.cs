@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using TripManager.Common;
 using TripManager.Domain.Emails;
 
 namespace TripManager.Domain;

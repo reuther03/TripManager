@@ -1,4 +1,6 @@
-﻿namespace TripManager.Domain.Emails;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace TripManager.Domain.Emails;
 
 public class EmailMessage
 {
@@ -6,7 +8,7 @@ public class EmailMessage
     public string Subject { get; }
     public string Body { get; }
 
-    public EmailMessage(string email, string subject, string body)
+    public EmailMessage(string email, string subject, [StringSyntax(StringSyntaxAttribute.Xml)] string body)
     {
         Email = email;
         Subject = subject;

@@ -29,4 +29,11 @@ public class UsersController : ControllerBase
         var token = await _sender.Send(command, cancellationToken);
         return Ok(token);
     }
+
+    [HttpDelete("{userId:guid}")]
+    public async Task<ActionResult> Delete(Guid userId, CancellationToken cancellationToken = default)
+    {
+        await _sender.Send(new DeleteCommand(userId), cancellationToken);
+        return NoContent();
+    }
 }

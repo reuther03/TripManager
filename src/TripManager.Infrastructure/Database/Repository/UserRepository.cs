@@ -29,6 +29,10 @@ public class UserRepository : IUserRepository
     public async Task<User?> GetByUsernameAsync(string username)
         => await _context.Users.FirstOrDefaultAsync(x => x.Username == username);
 
+    public void DeleteAsync(User user, CancellationToken cancellationToken = default)
+        => _context.Users.Remove(user);
+
+
     public async Task AddAsync(User user, CancellationToken cancellationToken = default)
         => await _context.Users.AddAsync(user, cancellationToken);
 }

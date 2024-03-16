@@ -1,5 +1,6 @@
 ﻿using TripManager.Common.Primitives.Domain;
 using TripManager.Common.ValueObjects;
+using TripManager.Domain.DomainEvents;
 using TripManager.Domain.Trips;
 using TripManager.Domain.Users.ValueObjects;
 
@@ -36,5 +37,9 @@ public class User : Entity<UserId>
         => new(UserId.New(), email, username, password, fullname, Role.Admin, Date.Now.Value);
 
     public static User CreateUser(Email email, Username username, Password password, Fullname fullname)
-        => new(UserId.New(), email, username, password, fullname, Role.User, Date.Now);
+    {
+        var user = new User(UserId.New(), email, username, password, fullname, Role.User, Date.Now);
+        user.RaiseDomainEvent(new UserCreatedDomainEvent(user.Id, user.Email));
+        return user;
+    }
 }

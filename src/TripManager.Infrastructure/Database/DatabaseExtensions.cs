@@ -4,9 +4,9 @@ using Microsoft.Extensions.DependencyInjection;
 using TripManager.Application.Abstractions;
 using TripManager.Application.Abstractions.Database;
 using TripManager.Application.Abstractions.Database.Repositories;
-using TripManager.Application.Features.Emails;
 using TripManager.Common;
 using TripManager.Infrastructure.Database.Repository;
+using TripManager.Infrastructure.Emails;
 
 // using TripManager.Infrastructure.Database.Repository;
 

@@ -42,7 +42,7 @@ public sealed class TripDbContext : DbContext, ITripDbContext
 
         foreach (var entity in domainEntities)
         {
-            var events = entity.Entity.DomainEvents;
+            var events = entity.Entity.DomainEvents.ToList();
             entity.Entity.ClearDomainEvents();
 
             foreach (var domainEvent in events)
