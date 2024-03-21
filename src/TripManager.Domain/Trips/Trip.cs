@@ -43,7 +43,7 @@ public class Trip : Entity<TripId>
         }
 
         var trip = new Trip(TripId.New(), country, description, start, end, settings, userId);
-        // trip.RaiseDomainEvent(new TripCreatedDomainEvent(trip.Id, trip.UserId));
+        trip.RaiseDomainEvent(new TripCreatedDomainEvent(trip.Id));
         return trip;
     }
 
@@ -64,8 +64,6 @@ public class Trip : Entity<TripId>
         Start = start;
         End = end;
         Settings = settings;
-
-        RaiseDomainEvent(new UpdatedTripDomainEvent(Id));
     }
 
     public void RemoveActivity(Guid activityId)

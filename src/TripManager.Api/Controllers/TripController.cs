@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TripManager.Application.Features.Trips.Commands;
 using TripManager.Application.Features.Trips.Queries.GetAllTrips;
@@ -45,6 +46,7 @@ public class TripsController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize]
     public async Task<ActionResult<Guid>> CreateTrip([FromBody] CreateTripCommand command)
     {
         var trip = await _sender.Send(command);
