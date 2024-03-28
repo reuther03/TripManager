@@ -22,7 +22,6 @@ public sealed class JwtProvider : IJwtProvider
         List<Claim> claims =
         [
             new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-            new Claim(JwtRegisteredClaimNames.Email, user.Email),
             new Claim(JwtRegisteredClaimNames.UniqueName, user.Username),
             new Claim(ClaimConsts.UserId, user.Id.ToString()),
             new Claim(ClaimConsts.Email, user.Email),
@@ -50,6 +49,6 @@ public sealed class JwtProvider : IJwtProvider
 public static class ClaimConsts
 {
     public const string UserId = "user_id";
-    public const string Email = "email";
-    public const string Username = "username";
+    public const string Email = "user_email";
+    public const string Username = "user_username";
 }

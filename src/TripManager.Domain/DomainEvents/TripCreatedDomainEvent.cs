@@ -2,4 +2,4 @@
 
 namespace TripManager.Domain.DomainEvents;
 
-public sealed record TripCreatedDomainEvent(Guid TripId) : IDomainEvent;
+public sealed record TripCreatedDomainEvent(Guid TripId, Guid UserId) : IDomainEvent;

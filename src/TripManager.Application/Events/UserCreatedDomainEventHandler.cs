@@ -18,7 +18,7 @@ public sealed class UserCreatedDomainEventHandler : IDomainEventHandler<UserCrea
     {
         var message = new EmailMessage(
             notification.Email,
-            " ",
+            "User Created",
             """
             <div style="background-color: #f0f0f0; padding: 20px; font-family: Arial, sans-serif; line-height: 1.5;">
                 <div style="max-width: 600px; margin: auto; background: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">

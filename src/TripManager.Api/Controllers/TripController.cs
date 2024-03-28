@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TripManager.Api.Controllers.Base;
 using TripManager.Application.Features.Trips.Commands;
 using TripManager.Application.Features.Trips.Queries.GetAllTrips;
 using TripManager.Application.Features.Trips.Queries.GetTrip;
@@ -9,9 +10,7 @@ using TripManager.Domain.Trips;
 
 namespace TripManager.Api.Controllers;
 
-[ApiController]
-[Route("[controller]")]
-public class TripsController : ControllerBase
+public class TripsController : BaseController
 {
     private readonly ISender _sender;
 
@@ -32,57 +31,57 @@ public class TripsController : ControllerBase
     /// <param name="id">The id of the trip</param>
     /// <returns>The trip</returns>
     [HttpGet("{id:guid}")]
-    public async Task<ActionResult<Trip>> GetById([FromRoute] Guid id)
+    public async Task<IActionResult> GetById([FromRoute] Guid id)
     {
         var trip = await _sender.Send(new GetTripQuery(id));
-        return Ok(trip);
+        return HandleResult(trip);
     }
 
     [HttpGet]
-    public async Task<ActionResult<PaginatedList<TripDto>>> GetAll([FromQuery] GetAllTripsQuery query)
+    public async Task<IActionResult> GetAll([FromQuery] GetAllTripsQuery query)
     {
         var trips = await _sender.Send(query);
-        return Ok(trips);
+        return HandleResult(trips);
     }
 
     [HttpPost]
     [Authorize]
-    public async Task<ActionResult<Guid>> CreateTrip([FromBody] CreateTripCommand command)
+    public async Task<IActionResult> CreateTrip([FromBody] CreateTripCommand command)
     {
         var trip = await _sender.Send(command);
-        return Ok(trip);
+        return HandleResult(trip);
     }
 
     [HttpPost("{id:guid}/activities")]
-    public async Task<ActionResult<Guid>> AddActivity([FromRoute] Guid id, [FromBody] AddActivityCommand command)
+    public async Task<IActionResult> AddActivity([FromRoute] Guid id, [FromBody] AddActivityCommand command)
     {
         var activity = await _sender.Send(command with { TripId = id });
-        return Ok(activity);
+        return HandleResult(activity);
     }
 
     [HttpPut("{id:guid}")]
-    public async Task<ActionResult> UpdateTrip([FromRoute] Guid id, [FromBody] UpdateTripCommand command)
+    public async Task<IActionResult> UpdateTrip([FromRoute] Guid id, [FromBody] UpdateTripCommand command)
     {
         await _sender.Send(command with { Id = id });
-        return Ok();
+        return HandleResult();
     }
 
     [HttpPut("{id:guid}/activities/{activityId:guid}")]
-    public async Task<ActionResult> UpdateActivity([FromRoute] Guid id, [FromRoute] Guid activityId, UpdateActivityCommand command)
+    public async Task<IActionResult> UpdateActivity([FromRoute] Guid id, [FromRoute] Guid activityId, UpdateActivityCommand command)
     {
         await _sender.Send(command with { TripId = id, ActivityId = activityId });
-        return Ok();
+        return HandleResult();
     }
 
     [HttpDelete("{id:guid}")]
-    public async Task<ActionResult> DeleteTrip([FromRoute] Guid id)
+    public async Task<IActionResult> DeleteTrip([FromRoute] Guid id)
     {
         await _sender.Send(new DeleteTripCommand(id));
         return NoContent();
     }
 
     [HttpDelete("{id:guid}/activities/{activityId:guid}")]
-    public async Task<ActionResult> DeleteActivity([FromRoute] Guid id, [FromRoute] Guid activityId)
+    public async Task<IActionResult> DeleteActivity([FromRoute] Guid id, [FromRoute] Guid activityId)
     {
         await _sender.Send(new DeleteActivityCommand(id, activityId));
         return NoContent();

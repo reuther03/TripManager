@@ -43,7 +43,7 @@ public class Trip : Entity<TripId>
         }
 
         var trip = new Trip(TripId.New(), country, description, start, end, settings, userId);
-        trip.RaiseDomainEvent(new TripCreatedDomainEvent(trip.Id));
+        trip.RaiseDomainEvent(new TripCreatedDomainEvent(trip.Id, trip.UserId));
         return trip;
     }
 

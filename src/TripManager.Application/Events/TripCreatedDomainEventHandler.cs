@@ -3,6 +3,7 @@ using TripManager.Application.Abstractions.Database;
 using TripManager.Common.Primitives.DomainEvents;
 using TripManager.Domain.DomainEvents;
 using TripManager.Domain.Emails;
+using TripManager.Domain.Users;
 
 namespace TripManager.Application.Events;
 
@@ -22,11 +23,14 @@ public class TripCreatedDomainEventHandler : IDomainEventHandler<TripCreatedDoma
     public async Task Handle(TripCreatedDomainEvent notification, CancellationToken cancellationToken)
     {
         var email = _tripDbContext.Users
-            .Where(x => x.Id == _userContext.UserId)
+            .Where(x => x.Id == UserId.From(notification.UserId))
             .Select(x => x.Email)
             .FirstOrDefault();
 
-        var message = new EmailMessage(email, " ", "<p>Trip is created!!!</p>");
+        if (email is null)
+            return;
+
+        var message = new EmailMessage(email, "Trip Created", "<p>Trip with id " + notification.TripId + " has been created.</p>");
         await _emailSender.Send(message);
     }
 }

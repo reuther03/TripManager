@@ -1,4 +1,6 @@
-﻿namespace TripManager.Common.Exceptions.Application;
+﻿using FluentValidation.Results;
+
+namespace TripManager.Common.Exceptions.Application;
 
 public sealed class ApplicationValidationException : AppException
 {
@@ -9,6 +11,11 @@ public sealed class ApplicationValidationException : AppException
 
     public ApplicationValidationException(string messageFormat, params object[] args)
         : base(messageFormat, args)
+    {
+    }
+
+    public ApplicationValidationException(string messageFormat, IEnumerable<ValidationFailure> validationFailures)
+        : base(string.Format(messageFormat, string.Join(", ", validationFailures.Select(x => x.ErrorMessage))))
     {
     }
 }

@@ -1,4 +1,5 @@
-﻿using TripManager.Domain.Trips;
+﻿using System.Linq.Expressions;
+using TripManager.Domain.Trips;
 
 namespace TripManager.Application.Features.Trips.Queries.GetTrip;
 
@@ -28,4 +29,15 @@ public class TripDto
         };
     }
 
+    // public static Expression<Func<Trip, TripDto>> Mapper => trip => new TripDto
+    // {
+    //     Id = trip.Id,
+    //     Country = trip.Country,
+    //     Description = trip.Description,
+    //     Start = trip.Start,
+    //     End = trip.End,
+    //     SettingsDescription = trip.Settings.Description,
+    //     SettingsBudget = trip.Settings.Budget,
+    //     Activities = trip.Activities.Select(TripActivityDto.AsDto).ToList()
+    // };
 }
