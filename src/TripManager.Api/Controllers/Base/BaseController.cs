@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TripManager.Common.Primitives;
 using TripManager.Common.Primitives.Envelopes;
 
 namespace TripManager.Api.Controllers.Base;

@@ -4,7 +4,7 @@ using TripManager.Application.Features.Users.Dto;
 using TripManager.Common.Abstractions;
 using TripManager.Common.Exceptions.Application;
 
-namespace TripManager.Application.Features.Users.Commands;
+namespace TripManager.Application.Features.Users.Commands.Login;
 
 public record LoginCommand(string Email, string Password) : ICommand<AccessToken>
 {

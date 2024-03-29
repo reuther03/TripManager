@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace TripManager.Application.Features.Users.Commands;
+namespace TripManager.Application.Features.Users.Commands.SignUp;
 
 public class SignUpCommandValidator : AbstractValidator<SignUpCommand>
 {

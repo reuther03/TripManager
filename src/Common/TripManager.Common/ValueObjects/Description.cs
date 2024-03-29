@@ -3,7 +3,7 @@ using TripManager.Common.Primitives.Domain;
 
 namespace TripManager.Common.ValueObjects;
 
-public record Description : ValueObject
+public record  Description : ValueObject
 {
     public string Value { get; }
 

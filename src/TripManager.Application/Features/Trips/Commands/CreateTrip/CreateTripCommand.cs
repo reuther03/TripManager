@@ -7,7 +7,7 @@ using TripManager.Common.ValueObjects;
 using TripManager.Domain.Trips;
 using TripManager.Domain.Trips.ValueObjects;
 
-namespace TripManager.Application.Features.Trips.Commands;
+namespace TripManager.Application.Features.Trips.Commands.CreateTrip;
 
 public record CreateTripCommand(
     string Country,

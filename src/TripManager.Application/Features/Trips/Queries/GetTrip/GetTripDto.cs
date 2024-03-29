@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-using TripManager.Domain.Trips;
+﻿using TripManager.Domain.Trips;
 
 namespace TripManager.Application.Features.Trips.Queries.GetTrip;
 

@@ -23,6 +23,7 @@ public class ExceptionMiddleware : IMiddleware
         }
         catch (Exception exception)
         {
+            _logger.LogError("An error occurred: {Message}", exception.Message);
             var statusCode = exception switch
             {
                 ApplicationValidationException => StatusCodes.Status400BadRequest,
@@ -41,5 +42,3 @@ public class ExceptionMiddleware : IMiddleware
         }
     }
 }
-
-// envelope object

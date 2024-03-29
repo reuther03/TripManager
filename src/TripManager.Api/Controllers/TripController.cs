@@ -3,10 +3,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TripManager.Api.Controllers.Base;
 using TripManager.Application.Features.Trips.Commands;
+using TripManager.Application.Features.Trips.Commands.CreateTrip;
 using TripManager.Application.Features.Trips.Queries.GetAllTrips;
 using TripManager.Application.Features.Trips.Queries.GetTrip;
-using TripManager.Common.Primitives.Pagination;
-using TripManager.Domain.Trips;
 
 namespace TripManager.Api.Controllers;
 

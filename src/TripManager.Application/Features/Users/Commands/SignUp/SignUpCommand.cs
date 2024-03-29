@@ -7,7 +7,7 @@ using TripManager.Domain.Users;
 using TripManager.Domain.Users.ValueObjects;
 using PassValueObject = TripManager.Domain.Users.ValueObjects.Password;
 
-namespace TripManager.Application.Features.Users.Commands;
+namespace TripManager.Application.Features.Users.Commands.SignUp;
 
 public record SignUpCommand(string Email, string Username, string Password, string Fullname) : ICommand<Guid>
 {

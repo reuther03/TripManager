@@ -1,7 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using TripManager.Api.Controllers.Base;
-using TripManager.Application.Features.Users.Commands;
+using TripManager.Application.Features.Users.Commands.Login;
+using TripManager.Application.Features.Users.Commands.SignUp;
 
 namespace TripManager.Api.Controllers;
 
@@ -27,12 +28,5 @@ public class UsersController : BaseController
     {
         var token = await _sender.Send(command, cancellationToken);
         return HandleResult(token);
-    }
-
-    [HttpDelete("{userId:guid}")]
-    public async Task<IActionResult> Delete(Guid userId, CancellationToken cancellationToken = default)
-    {
-        await _sender.Send(new DeleteCommand(userId), cancellationToken);
-        return NoContent();
     }
 }
