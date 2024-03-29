@@ -21,7 +21,6 @@ public class ValidationPipelineBehavior<TRequest, TResponse>
 
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
-        _logger.LogInformation("Starting request {Request}, {DateTimeUtc}", typeof(TRequest).Name, DateTime.UtcNow);
         if (!_validators.Any())
         {
             return await next();
@@ -37,12 +36,10 @@ public class ValidationPipelineBehavior<TRequest, TResponse>
 
         if (errors.Count != 0)
         {
-            _logger.LogError("Invalid request {Request}, {DateTimeUtc}", typeof(TRequest).Name, DateTime.UtcNow);
             throw new ApplicationValidationException("Validation failed: {0}", errors);
         }
 
         var response = await next();
-        _logger.LogInformation("Completed request {Request}, {DateTimeUtc}", typeof(TRequest).Name, DateTime.UtcNow);
 
         return response;
     }

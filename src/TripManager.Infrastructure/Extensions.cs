@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TripManager.Application;
+using TripManager.Application.Behaviors;
 using TripManager.Infrastructure.Auth;
 using TripManager.Infrastructure.Database;
 using TripManager.Infrastructure.Middlewares;
@@ -28,6 +29,9 @@ internal static class Extensions
                 typeof(IApplicationAssembly).Assembly,
                 typeof(IInfrastructureAssembly).Assembly
             ]);
+
+            config.AddOpenBehavior(typeof(LoggingPipelineBehavior<,>));
+            config.AddOpenBehavior(typeof(ValidationPipelineBehavior<,>));
         });
 
         return services;
