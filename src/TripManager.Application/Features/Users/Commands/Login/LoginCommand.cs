@@ -6,7 +6,7 @@ using TripManager.Common.Exceptions.Application;
 
 namespace TripManager.Application.Features.Users.Commands.Login;
 
-public record LoginCommand(string Email, string Password, List<string> DummyCollection) : ICommand<AccessToken>
+public record LoginCommand(string Email, string Password) : ICommand<AccessToken>
 {
     internal sealed class Handler : ICommandHandler<LoginCommand, AccessToken>
     {
