@@ -52,6 +52,7 @@ public class TripsController : BaseController
     }
 
     [HttpPost("{id:guid}/activities")]
+    [Authorize]
     public async Task<IActionResult> AddActivity([FromRoute] Guid id, [FromBody] AddActivityCommand command)
     {
         var activity = await _sender.Send(command with { TripId = id });
@@ -59,6 +60,7 @@ public class TripsController : BaseController
     }
 
     [HttpPut("{id:guid}")]
+    [Authorize]
     public async Task<IActionResult> UpdateTrip([FromRoute] Guid id, [FromBody] UpdateTripCommand command)
     {
         await _sender.Send(command with { Id = id });
@@ -66,6 +68,7 @@ public class TripsController : BaseController
     }
 
     [HttpPut("{id:guid}/activities/{activityId:guid}")]
+    [Authorize]
     public async Task<IActionResult> UpdateActivity([FromRoute] Guid id, [FromRoute] Guid activityId, UpdateActivityCommand command)
     {
         await _sender.Send(command with { TripId = id, ActivityId = activityId });
@@ -73,6 +76,7 @@ public class TripsController : BaseController
     }
 
     [HttpDelete("{id:guid}")]
+    [Authorize]
     public async Task<IActionResult> DeleteTrip([FromRoute] Guid id)
     {
         await _sender.Send(new DeleteTripCommand(id));
@@ -80,6 +84,7 @@ public class TripsController : BaseController
     }
 
     [HttpDelete("{id:guid}/activities/{activityId:guid}")]
+    [Authorize]
     public async Task<IActionResult> DeleteActivity([FromRoute] Guid id, [FromRoute] Guid activityId)
     {
         await _sender.Send(new DeleteActivityCommand(id, activityId));

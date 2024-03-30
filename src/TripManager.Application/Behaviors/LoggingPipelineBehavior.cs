@@ -1,8 +1,5 @@
-﻿using FluentValidation;
-using MediatR;
+﻿using MediatR;
 using Microsoft.Extensions.Logging;
-using TripManager.Common.Abstractions;
-using TripManager.Common.Exceptions.Application;
 
 namespace TripManager.Application.Behaviors;
 

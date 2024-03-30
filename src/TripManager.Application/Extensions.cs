@@ -1,7 +1,5 @@
 ﻿using FluentValidation;
-using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using TripManager.Application.Behaviors;
 
 namespace TripManager.Application;
 
